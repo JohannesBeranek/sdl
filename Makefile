@@ -1,6 +1,8 @@
 CC         = g++
-CFLAGS     = -c -Wall -O2
-LDFLAGS    =
+SDLCFLAGS  := $(shell sdl2-config --cflags)
+CFLAGS     = -c -Wall -O2 $(SDLCFLAGS)
+SDLLDFLAGS := $(shell sdl2-config --libs)
+LDFLAGS    = $(SDLLDFLAGS)
 
 SRCDIR     = src/
 OBJECTDIR  = obj/
@@ -30,6 +32,6 @@ $(OBJECTDIR):
 
 $(OBJECTDIR)%.o : $(SRCDIR)%.cpp
 	@echo $< 
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 
